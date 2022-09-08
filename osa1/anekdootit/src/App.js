@@ -16,7 +16,6 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
   const [vote, setVote] = useState(votes)
-  console.log(vote)
 
   const most = Math.max(...vote)
   const index = vote.indexOf(most)
