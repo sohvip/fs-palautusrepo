@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Added Sugar Is Ruining Your Energy Levels",
+    "author": "Day Health",
+    "url": "https://sugarless.com",
+    "likes": 15
+}

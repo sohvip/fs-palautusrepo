@@ -54,6 +54,13 @@ const App = () => {
         .then(response =>
           setPersons(persons.concat(response))
         )
+        .catch(error => {
+          console.log(error.response.data)
+          setPopupMessage(error.response.data)
+          setTimeout(() => {
+            setPopupMessage(null)
+          }, 4000)
+        })
       setPopupMessage(`Added ${personObject.name}`)
       setTimeout(() => {
         setPopupMessage(null)

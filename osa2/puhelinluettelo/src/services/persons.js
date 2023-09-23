@@ -1,9 +1,22 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/persons'
+
+let baseUrl = '/api/persons'
+let deploymentUrl = 'http://localhost:3001/api/persons'
+
+/*const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}*/
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+  return request
+    .then((response) => response.data)
+    .catch((error) => {
+      alert('URL not connecting...changing to another')
+      baseUrl = deploymentUrl
+      return axios.get(baseUrl).then((response) => response.data)
+    })
 }
 
 const create = newObject => {
