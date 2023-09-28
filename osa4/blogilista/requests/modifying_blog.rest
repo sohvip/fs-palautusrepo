@@ -1,0 +1,9 @@
+PUT http://localhost:3003/api/blogs/650eb2bbd2e8b940b4d1898a
+Content-Type: application/json
+
+{
+    "title": "Why You Should Wake Up At 5AM",
+    "author": "Earl Birdy",
+    "url": "https://5amclub.com",
+    "likes": 666
+}

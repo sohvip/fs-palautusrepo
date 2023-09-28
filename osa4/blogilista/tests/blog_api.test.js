@@ -106,6 +106,44 @@ test('new blog with missing title or url field gives error', async () => {
 
 })
 
+test('deletion succeeds with status code 204', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+    const blogId = blogToDelete.id
+
+    await api
+        .delete(`/api/blogs/${blogId}`)
+        .expect(204)
+
+    const blogsAtEnd = await helper.blogsInDb()
+
+    expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
+
+    const titles = blogsAtEnd.map(b => b.title)
+
+    expect(titles).not.toContain(blogToDelete.title)
+})
+
+test('blog is modified successfully', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToModify = blogsAtStart[0]
+    const blogId = blogToModify.id
+
+    const modifiedBlog = {
+        likes: 15
+    }
+
+    await api
+        .put(`/api/blogs/${blogId}`)
+        .send(modifiedBlog)
+        .expect(200)
+    
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(blogsAtStart.length)
+
+    expect(blogsAtEnd[0].likes).toBe(15)
+})
+
 afterAll(async () => {
     await mongoose.connection.close()
 })
