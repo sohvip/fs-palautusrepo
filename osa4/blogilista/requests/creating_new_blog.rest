@@ -2,8 +2,9 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Added Sugar Is Ruining Your Energy Levels",
-    "author": "Day Health",
-    "url": "https://sugarless.com",
-    "likes": 15
+    "title": "You Won't Believe How Much Sleep Is Actually Enough",
+    "author": "Sleepwalker",
+    "url": "https://sleepingrocks.com",
+    "likes": 17,
+    "userId": "651a6b9d87b5af83922a924e"
 }
