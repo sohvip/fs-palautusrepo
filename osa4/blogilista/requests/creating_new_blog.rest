@@ -1,10 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InowaHZpIiwiaWQiOiI2NTFhNmI5ZDg3YjVhZjgzOTIyYTkyNGUiLCJpYXQiOjE2OTYzMjMzOTh9.oH7khHA7jCMRV05m7l2KRMVZfnXMgww1qTYKenxHynQ
 
 {
-    "title": "You Won't Believe How Much Sleep Is Actually Enough",
-    "author": "Sleepwalker",
-    "url": "https://sleepingrocks.com",
-    "likes": 17,
-    "userId": "651a6b9d87b5af83922a924e"
+    "title": "Why You Really Should Stop Drinking",
+    "author": "DUI",
+    "url": "https://tequila.com",
+    "likes": 1
 }
