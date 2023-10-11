@@ -4,3 +4,4 @@
 [osa 2](https://github.com/sohvip/fs-palautusrepo/tree/main/osa2)  
 [osa 3](https://github.com/sohvip/fs-osa3) (eri repositoriossa)  
 [osa 4](https://github.com/sohvip/fs-palautusrepo/tree/main/osa4)  
+[osa 5](https://github.com/sohvip/fs-palautusrepo/tree/main/osa5)  
