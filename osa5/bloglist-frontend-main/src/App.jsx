@@ -22,9 +22,7 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  
   const [message, setMessage] = useState(null)
-  const [newBlogVisible, setNewBlogVisible] = useState(false)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -41,7 +39,7 @@ const App = () => {
     }
   }, [])
 
-  const addBlog = (blogObject) => {
+  const addBlog = blogObject => {
     blogFormRef.current.toggleVisibility()
     blogService
       .create(blogObject)
@@ -52,6 +50,31 @@ const App = () => {
     setTimeout(() => {
       setMessage(null)
     }, 5000)
+  }
+
+  const handelLike = blogObject => {
+    const requestData = {
+      user: blogObject.user.id,
+      likes: blogObject.likes + 1,
+      author: blogObject.author,
+      title: blogObject.title,
+      url: blogObject.url
+    }
+    blogService
+      .like(requestData, blogObject.id)
+      .then(response => {
+        setBlogs(blogs.map(blog => blog.id === blogObject.id ? response : blog))
+      })
+  }
+
+  const deletingBlog = blogId => {
+    if (window.confirm("Do you really want to delete this blog?")) {
+      blogService
+        .deleteBlog(blogId)
+        .then(() => {
+          setBlogs(allBlogs => allBlogs.filter(blog => blog.id !== blogId))
+        })
+      }
   }
 
   const handleLogin = async (event) => {
@@ -143,8 +166,8 @@ const App = () => {
       </div>
       <br></br>
       <div>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+        {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
+            <Blog key={blog.id} blog={blog} setLike={() => handelLike(blog)} deleteBlog={() => deletingBlog(blog.id)} user={user.username}/>
         )}
       </div>
     </div>
