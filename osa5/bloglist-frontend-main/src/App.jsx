@@ -19,7 +19,7 @@ const Notification = ({ message }) => {
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('') 
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
@@ -27,7 +27,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -68,25 +68,25 @@ const App = () => {
   }
 
   const deletingBlog = blogId => {
-    if (window.confirm("Do you really want to delete this blog?")) {
+    if (window.confirm('Do you really want to delete this blog?')) {
       blogService
         .deleteBlog(blogId)
         .then(() => {
           setBlogs(allBlogs => allBlogs.filter(blog => blog.id !== blogId))
         })
-      }
+    }
   }
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    
+
     try {
       const user = await loginService.login({
         username, password,
       })
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
-      ) 
+      )
       blogService.setToken(user.token)
       setUser(user)
       setUsername('')
@@ -105,7 +105,7 @@ const App = () => {
     <form onSubmit={handleLogin}>
       <div>
         username
-          <input
+        <input
           type="text"
           value={username}
           name="Username"
@@ -114,7 +114,7 @@ const App = () => {
       </div>
       <div>
         password
-          <input
+        <input
           type="password"
           value={password}
           name="Password"
@@ -122,7 +122,7 @@ const App = () => {
         />
       </div>
       <button type="submit">login</button>
-    </form>      
+    </form>
   )
 
   const blogFormRef = useRef()
@@ -130,9 +130,9 @@ const App = () => {
   const blogForm = () => {
     return (
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
-          <BlogForm
-            createBlog={addBlog}
-          />
+        <BlogForm
+          createBlog={addBlog}
+        />
       </Togglable>
     )
   }
@@ -167,7 +167,7 @@ const App = () => {
       <br></br>
       <div>
         {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
-            <Blog key={blog.id} blog={blog} setLike={() => handelLike(blog)} deleteBlog={() => deletingBlog(blog.id)} user={user.username}/>
+          <Blog key={blog.id} blog={blog} setLike={() => handelLike(blog)} deleteBlog={() => deletingBlog(blog.id)} user={user.username}/>
         )}
       </div>
     </div>

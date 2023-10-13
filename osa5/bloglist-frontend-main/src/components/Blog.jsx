@@ -1,4 +1,5 @@
-import Togglable from "./Togglable"
+import Togglable from './Togglable'
+import PropTypes from 'prop-types'
 
 const Blog = ({ blog, setLike, deleteBlog, user }) => {
   const blogStyle = {
@@ -20,7 +21,14 @@ const Blog = ({ blog, setLike, deleteBlog, user }) => {
         <p>{blog.author}</p>
         {user !== blog.user.username ? null : <button onClick={deleteBlog}>delete</button>}
       </Togglable>
-  </div>
-)}
+    </div>
+  )}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  setLike: PropTypes.func.isRequired,
+  deleteBlog: PropTypes.func.isRequired,
+  user: PropTypes.string.isRequired
+}
 
 export default Blog
